@@ -75,8 +75,11 @@ public class DeviceBA {
         deviceClient.sendEventAsync(message, new MessageSentCallback(), message);
         MessageReceivedCallback callback = new MessageReceivedCallback();
         deviceClient.setMessageCallback(callback, null);
-        //LOGGER.info("Telemetry: Sent - {\"{}\": {}°C} with message Id {}.", telemetryName, temperature, message.getMessageId());
-        //temperatureReadings.put(new Date(), temperature);
+        /*
+        LOGGER.info("Telemetry: Sent - {\"{}\": {} C} with message Id {}.", telemetryName, temperature, message.getMessageId());
+        temperatureReadings.put(new Date(), temperature);
+
+         */
     }
 
     /**

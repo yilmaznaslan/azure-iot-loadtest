@@ -1,8 +1,5 @@
 package org.example.azure.services.iotHub.devicemanagement.business;
 
-import com.azure.core.util.Context;
-import com.azure.resourcemanager.iothub.IotHubManager;
-import com.azure.resourcemanager.iothub.models.ExportDevicesRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.microsoft.azure.sdk.iot.service.auth.AuthenticationMechanism;
@@ -37,31 +34,15 @@ public class DeviceManagementBA {
     private static final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
     private static boolean excludeKeys = false;
     private static String importBlobName = "devices.txt";
-    private final IotHubManager iotHubManager;
 
     private final String iotHubConnectionString;
     private final StorageBA storageBA;
-    private final String resourceGroupName;
     private final String GET_ALL_DEVICES = "SELECT * FROM devices";
 
-    public DeviceManagementBA(IotHubManager iotHubManager, StorageBA storageBA, String resourceGroupName, String iotHubConnectionString) {
-        this.iotHubManager = iotHubManager;
+    public DeviceManagementBA(StorageBA storageBA, String iotHubConnectionString) {
         this.storageBA = storageBA;
-        this.resourceGroupName = resourceGroupName;
         this.iotHubConnectionString = iotHubConnectionString;
     }
-
-    //ToDO The exportDevicesWithResponse might not work. Check if it works
-    public Object iotHubResourceExportDevices(String iotHubName) {
-        return iotHubManager
-                .iotHubResources()
-                .exportDevicesWithResponse(
-                        resourceGroupName,
-                        iotHubName,
-                        new ExportDevicesRequest().withExportBlobContainerUri("testBlob").withExcludeKeys(true),
-                        Context.NONE);
-    }
-
 
     public HashMap<String, Twin> getDeviceTwins() throws IOException, IotHubException {
         LOGGER.info("Getting all device twins");
@@ -83,7 +64,7 @@ public class DeviceManagementBA {
         devices.forEach((k, v) -> {
             try {
                 registryClient.removeDevice(k);
-                LOGGER.info("Deleting deviceId: {}",k);
+                LOGGER.info("Deleting deviceId: {}", k);
             } catch (IOException | IotHubException e) {
                 LOGGER.error("Failed to remove device: {}Reason: . Exception: {}", k, e.getCause(), e);
             }
