@@ -1,4 +1,4 @@
-package org.example.azure.services.iotHub.simulator;
+package org.example.azure.simulator;
 
 import com.codahale.metrics.annotation.Timed;
 import com.microsoft.azure.sdk.iot.device.exceptions.IotHubClientException;
@@ -25,7 +25,6 @@ public class DeviceSimulatorResource {
     @POST
     @Timed
     public void createStorageAccount() throws IotHubClientException, URISyntaxException, IOException {
-        System.out.println("asdasd");
         deviceBA.initializeDeviceClient();
     }
 

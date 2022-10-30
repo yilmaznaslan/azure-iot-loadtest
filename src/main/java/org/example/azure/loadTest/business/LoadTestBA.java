@@ -1,10 +1,9 @@
-package org.example.azure.services.iotHub.loadTest.business;
+package org.example.azure.loadTest.business;
 
 import com.microsoft.azure.sdk.iot.device.*;
 import com.microsoft.azure.sdk.iot.device.exceptions.IotHubClientException;
 import com.microsoft.azure.sdk.iot.device.transport.IotHubConnectionStatus;
 import com.microsoft.azure.sdk.iot.device.twin.Twin;
-import com.microsoft.azure.sdk.iot.device.twin.TwinCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,23 +20,23 @@ public class LoadTestBA {
     public void connectDeviceById(String deviceId) throws IotHubClientException, InterruptedException {
         String deviceConnectionString = getConnectionStringByDeviceId(deviceId);
         DeviceClient client = new DeviceClient(deviceConnectionString, IotHubClientProtocol.MQTT);
-        LOGGER.info("Successfully created an IoT Hub client.");
+        LOGGER.info("Successfully created an IoT Hub device client.");
 
         client.setConnectionStatusChangeCallback(new IotHubConnectionStatusChangeCallbackLogger(), new Object());
 
         try {
             client.open(false);
-            System.out.println("Opened connection to IoT Hub.");
+            LOGGER.info("Opened connection to IoT Hub.");
 
         } catch (Exception e) {
-            System.out.println("On exception, shutting down \n" + " Cause: " + e.getCause() + " \n" + e.getMessage());
+            LOGGER.warn("On exception, shutting down \n" + " Cause: " + e.getCause() + " \n" + e.getMessage());
             client.close();
-            System.out.println("Shutting down...");
         }
 
 
         int i = 1;
         Twin twin = client.getTwin();
+        /*
         TwinCollection reportedProperties =  twin.getReportedProperties();
         while(true){
             reportedProperties.replace("temp", String.valueOf(i) );
@@ -45,7 +44,7 @@ public class LoadTestBA {
             Thread.sleep(1000);
             i = i+1;
         }
-
+         */
     }
 
     private String getConnectionStringByDeviceId(String deviceId) {

@@ -1,7 +1,7 @@
-package org.example.azure.services.iotHub.loadTest.service;
+package org.example.azure.loadTest.service;
 
 import com.codahale.metrics.annotation.Timed;
-import org.example.azure.services.iotHub.loadTest.business.LoadTestBA;
+import org.example.azure.loadTest.business.LoadTestBA;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

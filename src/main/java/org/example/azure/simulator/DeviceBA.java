@@ -1,4 +1,4 @@
-package org.example.azure.services.iotHub.simulator;
+package org.example.azure.simulator;
 
 import com.microsoft.azure.sdk.iot.device.DeviceClient;
 import com.microsoft.azure.sdk.iot.device.IotHubClientProtocol;
