@@ -53,13 +53,17 @@ java -cp ":build/classes/java/main:build/libs/all-in-one-jar-1.0-SNAPSHOT.jar" c
 ## How to monitor device telemetry data
 
 There are multiple ways to monitor device telemetry data
+
+`az iot hub monitor-events --output table --device-id mydevice --hub-name {YourIoTHubName}`
+
+ex: `az iot hub monitor-events --output table --device-id dishwasher_1 --hub-name smartHomeDemoIotHub`
 ## IoT Hub
 
 ### Device Management
 
 #### Device Identity Management
 
-##### Importing deviceBA identities to IoT HUB a.k.a Device Registry in Bulk
+##### Importing deviceSimulatorBA identities to IoT HUB a.k.a Device Registry in Bulk
 
 
 
